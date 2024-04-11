@@ -8,6 +8,14 @@ date: "2024-04-11"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Install
+
+```{r eval = FALSE}
+remotes::install_github("rOpenGov/kelaopendata")
+```
+
+
+
 List datasets
 
 ```{r}

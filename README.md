@@ -2,6 +2,12 @@ kelaopendata
 ================
 2024-04-11
 
+Install
+
+``` r
+remotes::install_github("rOpenGov/kelaopendata")
+```
+
 List datasets
 
 ``` r
