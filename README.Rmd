@@ -1,0 +1,43 @@
+---
+title: "kelaopendata"
+output: github_document
+date: "2024-04-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+List datasets
+
+```{r}
+library(kelaopendata)
+dsets <- list_datasets()
+dsets
+```
+
+
+Get first 10 rows of data
+
+
+```{r}
+get_head(data_id = dsets$id[1])
+```
+
+Whole dataset
+
+
+```{r}
+whole_data <- get_data(data_id = dsets$id[1], sql = NA)
+whole_data
+```
+
+
+Subset only municipality Veteli
+
+```{r}
+veteli23 <- get_data(data_id = dsets$id[1], sql = "WHERE kunta_nro = 924 AND vuosi = 2023")
+veteli23
+```
+
+
