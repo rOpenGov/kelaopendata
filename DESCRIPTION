@@ -16,7 +16,9 @@ Imports:
     duckdb,
     dplyr,
     ckanr,
-    DBI
+    DBI,
+    jsonlite,
+    glue
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1

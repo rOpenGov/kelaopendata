@@ -5,7 +5,7 @@ date: "2024-04-11"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 
 Install
@@ -16,7 +16,7 @@ remotes::install_github("rOpenGov/kelaopendata")
 
 
 
-List datasets
+## List datasets
 
 ```{r}
 library(kelaopendata)
@@ -24,27 +24,45 @@ dsets <- list_datasets()
 dsets
 ```
 
+## Metadata
+
+Get metadata 
+
+```{r}
+meta <- get_metadata(data_id = dsets$id[1])
+meta[1:4]
+```
+
+
+Resources
+
+```{r}
+jsonlite::toJSON(meta$resources, pretty = T)
+```
+
+
+## Download data
 
 Get first 10 rows of data
 
 
 ```{r}
-get_head(data_id = dsets$id[1])
+get_data(data_id = dsets$id[1], sql = "LIMIT 10")
 ```
 
 Whole dataset
 
 
 ```{r}
-whole_data <- get_data(data_id = dsets$id[1], sql = NA)
+whole_data <- get_data(data_id = dsets$id[1])
 whole_data
 ```
 
 
-Subset only municipality Veteli
+Subset only men from municipality Veteli from year 2023
 
 ```{r}
-veteli23 <- get_data(data_id = dsets$id[1], sql = "WHERE kunta_nro = 924 AND vuosi = 2023")
+veteli23 <- get_data(data_id = dsets$id[1], sql = "WHERE kunta_nro = 924 AND vuosi = 2023 AND sukupuoli = 'Mies'")
 veteli23
 ```
 

@@ -2,13 +2,18 @@
 % Please edit documentation in R/read_data.R
 \name{get_data}
 \alias{get_data}
-\title{Get fist ten rows of data}
+\title{Download a table and use optional sql filters}
 \usage{
 get_data(data_id, sql = NA)
 }
 \arguments{
-\item{sql}{for filtering data}
+\item{data_id}{data id}
+
+\item{sql}{for filtering data NA if you want the whole data}
+}
+\value{
+tibble
 }
 \description{
-Get fist ten rows of data
+Download a table and use optional sql filters
 }

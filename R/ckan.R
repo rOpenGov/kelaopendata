@@ -43,7 +43,6 @@ list_ckan <- function(org = "Kansaneläkelaitos", n = 100){
 #' @return data.frame
 #' @export
 #'
-#' @examples
 list_datasets <- function(){
   dsets <- list_ckan()
   dlist <- list()
