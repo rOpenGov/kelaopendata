@@ -4,9 +4,14 @@
 #' @param org organisation to get listning from
 #' @param n number of hits
 #'
-#' @import dplyr
-#' @import ckanr
-#' @import tibble
+#' @importFrom ckanr ckanr_setup
+#' @importFrom ckanr package_search
+#' @importFrom glue glue
+#' @importFrom dplyr as_tibble
+#' @importFrom dplyr bind_rows
+#' @importFrom dplyr filter
+#' @importFrom dplyr %>%
+
 #'
 #' @return data.frame
 #' @export
@@ -41,6 +46,9 @@ list_ckan <- function(org = "Kansaneläkelaitos", n = 100){
 #' List datasets
 #'
 #' @return data.frame
+#'
+#' @importFrom dplyr bind_rows
+#'
 #' @export
 #'
 list_datasets <- function(){
@@ -61,6 +69,13 @@ list_datasets <- function(){
 
 
 
+#' Get details from a package
+#'
+#' @param input_dataset
+#'
+#' @return list
+#' @export
+#'
 pick_a_pkg <- function(input_dataset = "8df7939b-6c0e-4587-9aa1-95c076e7b0a3"){
 
   res <- list_ckan()
@@ -79,7 +94,13 @@ pick_a_pkg <- function(input_dataset = "8df7939b-6c0e-4587-9aa1-95c076e7b0a3"){
   return(pkg_lst)
 }
 
-
+#' Get links to csv files
+#'
+#' @param pkg_lst
+#'
+#' @return string
+#' @export
+#'
 get_csv_links <- function(pkg_lst){
   pkg <- pkg_lst$pkg
   json_nr <- pkg_lst$json_nr

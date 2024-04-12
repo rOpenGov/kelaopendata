@@ -11,25 +11,24 @@
 #' @return tibble
 #' @export
 #'
-#' @import DBI
+#' @importFrom DBI dbConnect
+#' @importFrom DBI dbExecute
+#' @importFrom DBI dbGetQuery
 #' @import duckdb
-#' @import dplyr
+#' @importFrom glue glue
+#' @importFrom dplyr as_tibble
+#' @importFrom dplyr %>%
 #'
 get_data <- function(data_id, sql = NA){
-
-  library(DBI)
-  library(duckdb)
-  library(dplyr)
-
 
   con <- dbConnect(duckdb())
   dbExecute(con, "FORCE INSTALL httpfs")
   dbExecute(con, "LOAD httpfs")
-
   dbGetQuery(con,
              glue::glue("SELECT *
    FROM PARQUET_SCAN('https://data.markuskainu.fi/kelaopendata/{data_id}.parquet')
    {sql}")) -> results
+  dbDisconnect(con)
   res <- as_tibble(results)
   return(res)
 }
@@ -46,7 +45,7 @@ get_data <- function(data_id, sql = NA){
 #' @return list
 #' @export
 #'
-#' @import jsonlite
+#' @importFrom jsonlite fromJSON
 #'
 get_metadata <- function(data_id){
   res <- jsonlite::fromJSON(glue::glue('https://data.markuskainu.fi/kelaopendata/{data_id}.json'))

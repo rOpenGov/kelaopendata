@@ -1,9 +1,10 @@
 Package: kelaopendata
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Version: 0.1.0001
+Date: 2024-04-12
+Author: Markus Kainu
+Maintainer: Markus Kainu <markus.kainu@kapsi.fi>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
