@@ -7,7 +7,7 @@ Author: Markus Kainu
 Maintainer: Markus Kainu <markus.kainu@kapsi.fi>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: Artistic-2.0 | file LICENSE
 URL: https://ropengov.github.io/kelaopendata/, https://github.com/rOpenGov/kelaopendata
 BugReports: https://github.com/rOpenGov/kelaopendata/issues
 Depends: 
