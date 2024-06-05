@@ -1,0 +1,86 @@
+---
+title: "Reading data using kelaopendata"
+author: "Markus Kainu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geocoding with R and geofi}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE, 
+  warning = FALSE,
+  fig.height = 7,  
+  fig.width = 7,
+  dpi = 75
+)
+```
+
+
+**Installation**
+
+`kelaopendata` can be installed from Github using
+
+```{r, eval = FALSE}
+# Install development version from GitHub
+remotes::install_github("ropengov/kelaopendata")
+```
+
+```{r}
+# Let's first create a function that checks if the suggested 
+# packages are available
+check_namespaces <- function(pkgs){
+  return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
+}
+```
+
+
+## List available datasets
+
+```{r}
+library(kelaopendata)
+library(dplyr)
+
+dsets <- list_datasets()
+print(dsets, n = 50)
+```
+
+## Obtaining data on Financial aid for students (opintotuki)
+
+**Metadata**
+
+```{r}
+id_opintotuki <- dsets[grepl("opintotu", dsets$name),]$id
+meta <- get_metadata(data_id = id_opintotuki)
+
+jsonlite::toJSON(meta$resources, pretty = T)
+```
+
+First 10 rows
+
+```{r}
+get_data(data_id = id_opintotuki, sql = "LIMIT 10")
+```
+
+```{r}
+d_opintotuki <- get_data(data_id = id_opintotuki)
+```
+
+
+
+```{r}
+yliopistot <- get_data(data_id = id_opintotuki, sql = "WHERE kunta_nro = 853 AND aikatyyppi = 'Kuukausi' AND etuus = 'Opintolainan valtiontakaus' AND oppilaitos_peruste = 'Viimeisin oppilaitos' AND oppilaitosaste = 'Yliopistot'")
+```
+
+```{r}
+library(ggplot2)
+ggplot(yliopistot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) + geom_col(position = position_stack()) + facet_wrap(~sukupuoli)
+```
+

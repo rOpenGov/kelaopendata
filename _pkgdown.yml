@@ -1,0 +1,12 @@
+navbar:
+  right:
+  - icon: fa-users
+    href: https://ropengov.org
+  - icon: fab fa-github
+    href: https://github.com/rOpenGov/kelaopendata
+url: https://ropengov.github.io/kelaopendata/
+template:
+  package: rogtemplate
+  opengraph:
+    twitter:
+      site: '@rOpenGov'
