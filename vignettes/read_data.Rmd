@@ -41,7 +41,6 @@ check_namespaces <- function(pkgs){
 }
 ```
 
-
 ## List available datasets
 
 ```{r}
@@ -69,18 +68,28 @@ First 10 rows
 get_data(data_id = id_opintotuki, sql = "LIMIT 10")
 ```
 
-```{r}
-d_opintotuki <- get_data(data_id = id_opintotuki)
-```
-
-
+Filter using SQL
 
 ```{r}
-yliopistot <- get_data(data_id = id_opintotuki, sql = "WHERE kunta_nro = 853 AND aikatyyppi = 'Kuukausi' AND etuus = 'Opintolainan valtiontakaus' AND oppilaitos_peruste = 'Viimeisin oppilaitos' AND oppilaitosaste = 'Yliopistot'")
+yliopistot <- get_data(data_id = id_opintotuki, 
+                       sql = "WHERE kunta_nro = 853 AND 
+                       aikatyyppi = 'Kuukausi' AND 
+                       etuus = 'Opintolainan valtiontakaus' AND 
+                       oppilaitos_peruste = 'Viimeisin oppilaitos' AND 
+                       oppilaitosaste = 'Yliopistot'")
+yliopistot
 ```
+
+Plot
 
 ```{r}
 library(ggplot2)
-ggplot(yliopistot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) + geom_col(position = position_stack()) + facet_wrap(~sukupuoli)
+ggplot(yliopistot, 
+       aes(x = vuosi, 
+           y = saaja_lkm, 
+           fill = ikaryhma)) + 
+  geom_col(position = position_stack()) + 
+  facet_wrap(~sukupuoli) + 
+  theme_minimal()
 ```
 
