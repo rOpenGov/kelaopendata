@@ -45,13 +45,12 @@ jsonlite::toJSON(meta$resources, pretty = T)
 
 Get first 10 rows of data
 
-
 ```{r}
 get_data(data_id = dsets$id[1], sql = "LIMIT 10")
 ```
 
-Whole dataset
 
+Whole dataset
 
 ```{r}
 whole_data <- get_data(data_id = dsets$id[1])
@@ -65,5 +64,4 @@ Subset only men from municipality Veteli from year 2023
 veteli23 <- get_data(data_id = dsets$id[1], sql = "WHERE kunta_nro = 924 AND vuosi = 2023 AND sukupuoli = 'Mies'")
 veteli23
 ```
-
 
