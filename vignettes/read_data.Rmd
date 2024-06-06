@@ -53,44 +53,61 @@ print(dsets, n = 50)
 
 ## Obtaining data on Financial aid for students (opintotuki)
 
-**Metadata**
+Download metadata and print values of variables
 
 ```{r}
-id_opintotuki <- dsets[grepl("opintotu", dsets$name),]$id
-meta <- get_metadata(data_id = id_opintotuki)
+d_id <- dsets[dsets$name == "opintotuen-saajat-ja-maksetut-tuet", ]$id
+
+meta <- get_metadata(data_id = d_id)
 
 jsonlite::toJSON(meta$resources, pretty = T)
 ```
 
-First 10 rows
+
+Then, let's query data on recipients of Student loan in the city of Turku using `kelaopendata::get_data()`-function
 
 ```{r}
-get_data(data_id = id_opintotuki, sql = "LIMIT 10")
-dat <- get_data(data_id = id_opintotuki)
+d_opintotuki <- kelaopendata::get_data(
+  data_id = d_id,
+  sql = "WHERE etuus = 'Opintolainan valtiontakaus' AND
+                            aikatyyppi = 'Vuosi' AND
+                            kunta_nimi = 'Turku' AND
+                            etuus = 'Opintolainan valtiontakaus' AND
+                            oppilaitos_peruste = 'Viimeisin oppilaitos'
+                           "
+)
+d_opintotuki
 ```
 
-Filter using SQL
+Next, let's filter the data bit more locally.
 
 ```{r}
-yliopistot <- get_data(data_id = id_opintotuki, 
-                       sql = "WHERE kunta_nro = 853 AND 
-                       aikatyyppi = 'Vuosi' AND 
-                       etuus = 'Yhteensä' AND 
-                       oppilaitos_peruste = 'Viimeisin oppilaitos' AND 
-                       oppilaitosaste = 'Yliopistot'")
-yliopistot %>% count(vuosi)
+d_plot <- d_opintotuki %>%
+  # Exclude
+  filter(sukupuoli != "Tuntematon",!oppilaitosaste %in% c("Tieto puuttuu", "Yhteensä")) %>%
+  mutate(oppilaitosaste = factor(
+    oppilaitosaste,
+    levels = c(
+      "Yliopistot",
+      "Ammattikorkeakoulut",
+      "Ammatilliset oppilaitokset",
+      "Lukiot",
+      "Muut oppilaitokset",
+      "Ulkomaiset oppilaitokset"
+    )
+  ))
 ```
 
-Plot
 
-```{r}
+Finally, let's draw a plot on recipients by gender and type of institution
+
+
+```{r, fig.width=8, fig.height=12}
 library(ggplot2)
-ggplot(yliopistot, 
-       aes(x = vuosi, 
-           y = saaja_lkm, 
-           fill = ikaryhma)) + 
-  geom_col(position = position_stack()) + 
-  facet_wrap(~sukupuoli) + 
-  theme_minimal()
+ggplot(d_plot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) +
+  geom_col(position = position_stack()) +
+  facet_grid(oppilaitosaste ~ sukupuoli) +
+  labs(title = "Recipients of government guarantee for a student loan in\nthe city of Turku in 2004 to 2024 by gender and type of institution") +
+  theme_light()
 ```
 
