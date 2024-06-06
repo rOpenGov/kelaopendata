@@ -1,12 +1,11 @@
 Package: kelaopendata
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0001
-Date: 2024-04-12
+Title: Access open data by National social insurance institution of Finland
+Version: 0.1.0002
+Date: 2024-06-06
 Author: Markus Kainu
 Maintainer: Markus Kainu <markus.kainu@kapsi.fi>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Designed to simplify and speed up access to open data from National social insurance institution of Finland (KELA) published at <https://www.avoindata.fi/data/fi/organization/kela>, the kelaopendata package offers researchers and analysts a set of tools to obtain data and metadata for a wide range of applications.
 License: Artistic-2.0 | file LICENSE
 URL: https://ropengov.github.io/kelaopendata/, https://github.com/rOpenGov/kelaopendata
 BugReports: https://github.com/rOpenGov/kelaopendata/issues

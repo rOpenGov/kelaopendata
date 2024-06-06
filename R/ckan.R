@@ -47,7 +47,7 @@ list_ckan <- function(org = "Kansaneläkelaitos", n = 100){
 #'
 #' @return data.frame
 #'
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr bind_rows arrange mutate
 #'
 #' @export
 #'
@@ -57,12 +57,15 @@ list_datasets <- function(){
   for (i in seq(dsets$results)){
     tmp <- dsets$results[i]
     dlist[[i]] <- data.frame(
+      modified = tmp[[1]]$metadata_modified,
       name = tmp[[1]]$name,
-      id = tmp[[1]]$id,
-      modified = tmp[[1]]$metadata_modified
+      id = tmp[[1]]$id
     )
   }
-  res <- do.call("bind_rows", dlist) %>% as_tibble()
+  res <- do.call("bind_rows", dlist) %>%
+    as_tibble() %>%
+    mutate(modified = as.Date(modified)) %>%
+    arrange(desc(modified))
   return(res)
 }
 

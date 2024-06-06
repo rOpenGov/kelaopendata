@@ -1,5 +1,5 @@
 ---
-title: "Reading data using kelaopendata"
+title: "Fetching data using kelaopendata"
 author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -66,6 +66,7 @@ First 10 rows
 
 ```{r}
 get_data(data_id = id_opintotuki, sql = "LIMIT 10")
+dat <- get_data(data_id = id_opintotuki)
 ```
 
 Filter using SQL
@@ -73,11 +74,11 @@ Filter using SQL
 ```{r}
 yliopistot <- get_data(data_id = id_opintotuki, 
                        sql = "WHERE kunta_nro = 853 AND 
-                       aikatyyppi = 'Kuukausi' AND 
-                       etuus = 'Opintolainan valtiontakaus' AND 
+                       aikatyyppi = 'Vuosi' AND 
+                       etuus = 'Yhteensä' AND 
                        oppilaitos_peruste = 'Viimeisin oppilaitos' AND 
                        oppilaitosaste = 'Yliopistot'")
-yliopistot
+yliopistot %>% count(vuosi)
 ```
 
 Plot

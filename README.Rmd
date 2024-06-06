@@ -14,54 +14,18 @@ Install
 remotes::install_github("rOpenGov/kelaopendata")
 ```
 
-
-
 ## List datasets
 
 ```{r}
 library(kelaopendata)
 dsets <- list_datasets()
-dsets
+print(dsets, n = 50)
 ```
 
-## Metadata
-
-Get metadata 
+Download the first 10 rows of the most recently modified data
 
 ```{r}
-meta <- get_metadata(data_id = dsets$id[1])
-meta[1:4]
-```
-
-
-Resources
-
-```{r}
-jsonlite::toJSON(meta$resources, pretty = T)
-```
-
-
-## Download data
-
-Get first 10 rows of data
-
-```{r}
-get_data(data_id = dsets$id[1], sql = "LIMIT 10")
-```
-
-
-Whole dataset
-
-```{r}
-whole_data <- get_data(data_id = dsets$id[1])
-whole_data
-```
-
-
-Subset only men from municipality Veteli from year 2023
-
-```{r}
-veteli23 <- get_data(data_id = dsets$id[1], sql = "WHERE kunta_nro = 924 AND vuosi = 2023 AND sukupuoli = 'Mies'")
-veteli23
+first_ten_rows <- get_data(data_id = dsets$id[1], sql = "LIMIT 10")
+first_ten_rows
 ```
 
