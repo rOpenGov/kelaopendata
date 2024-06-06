@@ -41,3 +41,9 @@ dsets <- list_datasets()
 print(dsets, n = 50)
 ```
 
+Print first 10 rows of most recently updated data that is `r kelaopendata::get_metadata(data_id = dsets[1,]$id)$title`
+
+```{r}
+kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
+```
+

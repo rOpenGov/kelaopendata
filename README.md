@@ -71,3 +71,26 @@ print(dsets, n = 50)
     ## 21 2024-05-15 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…
     ## 22 2024-04-22 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…
     ## 23 2023-06-19 helsingin-seudun-sairastavuusindeksi                         06f6…
+
+Print first 10 rows of most recently updated data that is Suomen
+eläkkeensaajat ja keskimääräiset eläkkeet
+
+``` r
+kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
+```
+
+    ## # A tibble: 10 × 13
+    ##    aikatyyppi kuukausi_nro vuosikuukausi vuosi kunta_nro kunta_nimi ikaryhma
+    ##    <chr>             <dbl>         <dbl> <dbl> <chr>     <chr>      <chr>   
+    ##  1 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  2 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  3 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  4 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  5 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  6 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  7 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  8 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ##  9 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ## 10 Kuukausi             12        202012  2020 563       Oulainen   50-54   
+    ## # ℹ 6 more variables: sukupuoli <chr>, etuus <chr>, asuinmaa <chr>,
+    ## #   elakejarjestelma <chr>, saaja_lkm <dbl>, maksettu_laskenta_eur <dbl>
