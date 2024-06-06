@@ -100,7 +100,7 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rOpenGov/kelaopendata"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="list-datasets">List datasets<a class="anchor" aria-label="anchor" href="#list-datasets"></a>
+<h2 id="list-available-datasets">List available datasets<a class="anchor" aria-label="anchor" href="#list-available-datasets"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/kelaopendata/">kelaopendata</a></span><span class="op">)</span></span>
@@ -132,130 +132,24 @@
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## 21 2024-05-15 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…</span></span>
 <span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="do">## 22 2024-04-22 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…</span></span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="do">## 23 2023-06-19 helsingin-seudun-sairastavuusindeksi                         06f6…</span></span></code></pre></div>
-<p>Download metadata and print values in key variables</p>
+<p>Print first 10 rows of most recently updated data that is Suomen eläkkeensaajat ja keskimääräiset eläkkeet</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d_id</span> <span class="op">&lt;-</span> <span class="va">dsets</span><span class="op">[</span><span class="va">dsets</span><span class="op">$</span><span class="va">name</span> <span class="op">==</span> <span class="st">"opintotuen-saajat-ja-maksetut-tuet"</span>,<span class="op">]</span><span class="op">$</span><span class="va">id</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu">kelaopendata</span><span class="fu">::</span><span class="fu"><a href="reference/get_metadata.html">get_metadata</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">d_id</span><span class="op">)</span></span>
-<span><span class="va">metadata</span><span class="op">$</span><span class="va">resources</span><span class="op">$</span><span class="va">schema</span><span class="op">$</span><span class="va">fields</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>,<span class="st">"values"</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">values</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 56 × 2</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">## # Groups:   name [15]</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##    name                  values                           </span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">##    &lt;chr&gt;                 &lt;chr&gt;                            </span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">##  1 aikatyyppi            Kuukausi                         </span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">##  2 aikatyyppi            Lukuvuosi                        </span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">##  3 aikatyyppi            Vuosi                            </span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">##  4 etuus                 Aikuisopintoraha                 </span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">##  5 etuus                 Asumislisä                       </span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">##  6 etuus                 Opintolainan valtiontakaus       </span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">##  7 etuus                 Opintoraha                       </span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##  8 etuus                 Opintoraha ja asumislisä yhteensä</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">##  9 ikaryhma              16-19                            </span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">## 10 ikaryhma              20-24                            </span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">## 11 ikaryhma              25-29                            </span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="do">## 12 ikaryhma              30-34                            </span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="do">## 13 ikaryhma              35-39                            </span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="do">## 14 kunta_nimi            004                              </span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="do">## 15 kunta_nimi            006                              </span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="do">## 16 kunta_nimi            015                              </span></span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="do">## 17 kunta_nimi            017                              </span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="do">## 18 kunta_nimi            040                              </span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="do">## 19 kunta_nro             004                              </span></span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="do">## 20 kunta_nro             005                              </span></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="do">## 21 kunta_nro             006                              </span></span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="do">## 22 kunta_nro             009                              </span></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="do">## 23 kunta_nro             010                              </span></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="do">## 24 kuukausi_nro          1                                </span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="do">## 25 kuukausi_nro          2                                </span></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="do">## 26 kuukausi_nro          3                                </span></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="do">## 27 kuukausi_nro          4                                </span></span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="do">## 28 kuukausi_nro          5                                </span></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="do">## 29 maksettu_eur          -10307222.69                     </span></span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="do">## 30 maksettu_eur          50169562.06                      </span></span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="do">## 31 maksettu_laskenta_eur 0                                </span></span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="do">## 32 maksettu_laskenta_eur 97654045.88                      </span></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="do">## 33 oppilaitos_peruste    Kaikki oppilaitokset             </span></span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="do">## 34 oppilaitos_peruste    Viimeisin oppilaitos             </span></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="do">## 35 oppilaitosaste        Ammatilliset oppilaitokset       </span></span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="do">## 36 oppilaitosaste        Ammattikorkeakoulut              </span></span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="do">## 37 oppilaitosaste        Lukiot                           </span></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="do">## 38 oppilaitosaste        Muut oppilaitokset               </span></span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="do">## 39 oppilaitosaste        Tieto puuttuu                    </span></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="do">## 40 saaja_laskenta_lkm    0                                </span></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="do">## 41 saaja_laskenta_lkm    15628                            </span></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="do">## 42 saaja_lkm             0                                </span></span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="do">## 43 saaja_lkm             15666                            </span></span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="do">## 44 sukupuoli             Mies                             </span></span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="do">## 45 sukupuoli             Nainen                           </span></span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="do">## 46 sukupuoli             Tuntematon                       </span></span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a><span class="do">## 47 vuosi                 2005                             </span></span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a><span class="do">## 48 vuosi                 2006                             </span></span>
-<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a><span class="do">## 49 vuosi                 2007                             </span></span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a><span class="do">## 50 vuosi                 2008                             </span></span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a><span class="do">## 51 vuosi                 2009                             </span></span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a><span class="do">## 52 vuosikuukausi         200512                           </span></span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a><span class="do">## 53 vuosikuukausi         200607                           </span></span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a><span class="do">## 54 vuosikuukausi         200612                           </span></span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="do">## 55 vuosikuukausi         200707                           </span></span>
-<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="do">## 56 vuosikuukausi         200712</span></span></code></pre></div>
-<p>Lets query data on recipients of Student loan in the city of Turku</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d_opintotuki</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_data.html">get_data</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">d_id</span>, </span>
-<span>                           sql <span class="op">=</span> <span class="st">"WHERE etuus = 'Opintolainan valtiontakaus' AND</span></span>
-<span><span class="st">                            aikatyyppi = 'Vuosi' AND</span></span>
-<span><span class="st">                            kunta_nimi = 'Turku' AND</span></span>
-<span><span class="st">                            etuus = 'Opintolainan valtiontakaus' AND</span></span>
-<span><span class="st">                            oppilaitos_peruste = 'Viimeisin oppilaitos'</span></span>
-<span><span class="st">                           "</span><span class="op">)</span></span>
-<span><span class="va">d_opintotuki</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## # A tibble: 1,630 × 15</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">##    aikatyyppi kuukausi_nro vuosikuukausi vuosi kunta_nro kunta_nimi ikaryhma    </span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;       </span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">##  1 Vuosi                12        202312  2023 853       Turku      Tieto puutt…</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="do">##  2 Vuosi                12        202312  2023 853       Turku      Tieto puutt…</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="do">##  3 Vuosi                12        202312  2023 853       Turku      Tieto puutt…</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="do">##  4 Vuosi                12        202312  2023 853       Turku      Tieto puutt…</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="do">##  5 Vuosi                12        202312  2023 853       Turku      Tieto puutt…</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="do">##  6 Vuosi                12        202312  2023 853       Turku      55-         </span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="do">##  7 Vuosi                12        202312  2023 853       Turku      55-         </span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="do">##  8 Vuosi                12        202312  2023 853       Turku      55-         </span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="do">##  9 Vuosi                12        202312  2023 853       Turku      55-         </span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="do">## 10 Vuosi                12        202312  2023 853       Turku      55-         </span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="do">## # ℹ 1,620 more rows</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="do">## # ℹ 8 more variables: sukupuoli &lt;chr&gt;, etuus &lt;chr&gt;, oppilaitos_peruste &lt;chr&gt;,</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="do">## #   oppilaitosaste &lt;chr&gt;, saaja_lkm &lt;dbl&gt;, saaja_laskenta_lkm &lt;dbl&gt;,</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="do">## #   maksettu_eur &lt;dbl&gt;, maksettu_laskenta_eur &lt;dbl&gt;</span></span></code></pre></div>
-<p>Manipulate data a bit</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">d_plot</span> <span class="op">&lt;-</span> <span class="va">d_opintotuki</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="co"># Exclude</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sukupuoli</span> <span class="op">!=</span> <span class="st">"Tuntematon"</span>,</span>
-<span>         <span class="op">!</span><span class="va">oppilaitosaste</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tieto puuttuu"</span>,<span class="st">"Yhteensä"</span><span class="op">)</span></span>
-<span>         <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>oppilaitosaste <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">oppilaitosaste</span>, </span>
-<span>                                 levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yliopistot"</span>,</span>
-<span>                                            <span class="st">"Ammattikorkeakoulut"</span>,</span>
-<span>                                            <span class="st">"Ammatilliset oppilaitokset"</span>, </span>
-<span>                                            <span class="st">"Lukiot"</span>, </span>
-<span>                                            <span class="st">"Muut oppilaitokset"</span>, </span>
-<span>                                            <span class="st">"Ulkomaiset oppilaitokset"</span></span>
-<span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Draw a plot on recipients</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">d_plot</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">vuosi</span>, y <span class="op">=</span> <span class="va">saaja_lkm</span>, fill <span class="op">=</span> <span class="va">ikaryhma</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html" class="external-link">position_stack</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">oppilaitosaste</span><span class="op">~</span><span class="va">sukupuoli</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Recipients of government guarantee for a student loan in\nthe city of Turku in 2004 to 2024 by gender and type of institution"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="README_files/figure-gfm/unnamed-chunk-6-1.png"><!-- --></p>
+<code class="sourceCode R"><span><span class="fu">kelaopendata</span><span class="fu">::</span><span class="fu"><a href="reference/get_data.html">get_data</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">dsets</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">$</span><span class="va">id</span>, sql <span class="op">=</span> <span class="st">"LIMIT 10"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 10 × 13</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##    aikatyyppi kuukausi_nro vuosikuukausi vuosi kunta_nro kunta_nimi ikaryhma</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;   </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">##  1 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">##  2 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">##  3 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">##  4 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">##  5 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">##  6 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">##  7 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">##  8 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##  9 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">## 10 Kuukausi             12        202012  2020 563       Oulainen   50-54   </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">## # ℹ 6 more variables: sukupuoli &lt;chr&gt;, etuus &lt;chr&gt;, asuinmaa &lt;chr&gt;,</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">## #   elakejarjestelma &lt;chr&gt;, saaja_lkm &lt;dbl&gt;, maksettu_laskenta_eur &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 </div>
 
