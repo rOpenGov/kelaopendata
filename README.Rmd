@@ -1,18 +1,37 @@
 ---
-title: "kelaopendata"
 output: github_document
-date: "2024-04-11"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 
-Install
+
+<!-- badges: start -->
+  [![rOG-badge](https://ropengov.github.io/rogtemplate/reference/figures/ropengov-badge.svg)](https://ropengov.org/)
+  [![R build status](https://github.com/rOpenGov/geofi//workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/geofi/actions/)
+  [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/)
+  [![codecov](https://codecov.io/gh/rOpenGov/geofi/branch/master/graph/badge.svg?token=yJSHHMSSKs)](https://app.codecov.io/gh/rOpenGov/kelaopendata)
+[![CRAN published](https://www.r-pkg.org/badges/version/kelatools)](https://www.r-pkg.org/pkg/kelatools)
+<!-- badges: end -->
+
+
+# kelaopendata - Access open data from National social insurance institution of Finland
+
+Finnish national social insurance institution [Kela](https://www.kela.fi/) publishes open data on recipients, reimbursements and costs of various social security benefits in Finland at <https://www.avoindata.fi/data/fi/organization/kela>. `kelaopendata`-package takes advantage of modern big data technologies such as [duckdb](https://duckdb.org/) and [Apache Parquet](https://parquet.apache.org/) and provides fast and straightforward access to data. 
+
+Below is a one example on how you can access data using `kelaopendata`. Please have a closer look at the [vignettes](https://ropengov.github.io/kelaopendata/articles/index.html) for more comprehensive use cases. 
+
+
+## Installation and use
 
 ```{r eval = FALSE}
+# Not yet published in CRAN
+
+# Install development version from GitHub
 remotes::install_github("rOpenGov/kelaopendata")
 ```
+
 
 ## List datasets
 
@@ -22,10 +41,64 @@ dsets <- list_datasets()
 print(dsets, n = 50)
 ```
 
-Download the first 10 rows of the most recently modified data
+Download metadata and print values in key variables
 
 ```{r}
-first_ten_rows <- get_data(data_id = dsets$id[1], sql = "LIMIT 10")
-first_ten_rows
+d_id <- dsets[dsets$name == "opintotuen-saajat-ja-maksetut-tuet",]$id
+
+library(dplyr)
+library(tidyr)
+metadata <- kelaopendata::get_metadata(data_id = d_id)
+metadata$resources$schema$fields[[1]][c("name","values")] %>% 
+  mutate(values = lapply(values, as.character)) %>%
+  unnest(cols = c(values)) %>% 
+  group_by(name) %>% 
+  slice(1:5) %>% 
+  print(n = 60)
+```
+
+Lets query data on recipients of Student loan in the city of Turku 
+
+```{r}
+d_opintotuki <- get_data(data_id = d_id, 
+                           sql = "WHERE etuus = 'Opintolainan valtiontakaus' AND
+                            aikatyyppi = 'Vuosi' AND
+                            kunta_nimi = 'Turku' AND
+                            etuus = 'Opintolainan valtiontakaus' AND
+                            oppilaitos_peruste = 'Viimeisin oppilaitos'
+                           ")
+d_opintotuki
+```
+
+Manipulate data a bit
+
+```{r}
+d_plot <- d_opintotuki %>% 
+  # Exclude
+  filter(sukupuoli != "Tuntematon",
+         !oppilaitosaste %in% c("Tieto puuttuu","Yhteensä")
+         ) %>% 
+  mutate(oppilaitosaste = factor(oppilaitosaste, 
+                                 levels = c("Yliopistot",
+                                            "Ammattikorkeakoulut",
+                                            "Ammatilliset oppilaitokset", 
+                                            "Lukiot", 
+                                            "Muut oppilaitokset", 
+                                            "Ulkomaiset oppilaitokset"
+)))
+```
+
+
+
+Draw a plot on recipients
+
+
+```{r, fig.width=8, fig.height=12}
+library(ggplot2)
+ggplot(d_plot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) +
+  geom_col(position = position_stack()) + 
+  facet_grid(oppilaitosaste~sukupuoli) +
+  labs(title = "Recipients of government guarantee for a student loan in\nthe city of Turku in 2004 to 2024 by gender and type of institution") +
+  theme_light()
 ```
 
