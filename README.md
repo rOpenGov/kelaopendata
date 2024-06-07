@@ -94,3 +94,7 @@ kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
     ## 10 Kuukausi             12        202012  2020 563       Oulainen   50-54   
     ## # ℹ 6 more variables: sukupuoli <chr>, etuus <chr>, asuinmaa <chr>,
     ## #   elakejarjestelma <chr>, saaja_lkm <dbl>, maksettu_laskenta_eur <dbl>
+
+## Disclaimer
+
+This package is in no way officially related to or endorsed by KELA.
