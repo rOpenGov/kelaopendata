@@ -53,18 +53,36 @@ print(dsets, n = 50)
 
 ## Obtaining data on Financial aid for students (opintotuki)
 
-Download metadata and print values of variables
+### Metadata
+
+For this example we choose "Financial aid for students" as our benefit of interest.  First we download the metadata and print the description field
 
 ```{r}
 d_id <- dsets[dsets$name == "opintotuen-saajat-ja-maksetut-tuet", ]$id
-
 meta <- get_metadata(data_id = d_id)
+meta$description
+```
 
+And then a more technical overview of the content of data set, containing names of the csv-files, csv-dialect and values and types of each indicator in the data. 
+
+```{r}
 jsonlite::toJSON(meta$resources, pretty = T)
 ```
 
+A more dense view of variables and their types and descriptions can be printed with
 
-Then, let's query data on recipients of Student loan in the city of Turku using `kelaopendata::get_data()`-function
+```{r}
+meta$resources$schema$fields[[1]] |>
+  select(-values) |>
+  as_tibble()
+```
+
+
+
+
+### Quering, downloading and plotting the data
+
+Let's query data on recipients of Student loan in the city of Turku using `kelaopendata::get_data()`-function
 
 ```{r}
 d_opintotuki <- kelaopendata::get_data(
@@ -79,7 +97,7 @@ d_opintotuki <- kelaopendata::get_data(
 d_opintotuki
 ```
 
-Next, let's filter the data bit more locally.
+Next, let's filter the data locally in R a bit more.
 
 ```{r}
 d_plot <- d_opintotuki %>%

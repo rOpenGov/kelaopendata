@@ -51,3 +51,4 @@ kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
 
 This package is in no way officially related to or endorsed by KELA.
 
+
