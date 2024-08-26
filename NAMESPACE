@@ -2,6 +2,7 @@
 
 export(get_csv_links)
 export(get_data)
+export(get_data_csv)
 export(get_metadata)
 export(list_ckan)
 export(list_datasets)
@@ -20,3 +21,4 @@ importFrom(dplyr,filter)
 importFrom(dplyr,mutate)
 importFrom(glue,glue)
 importFrom(jsonlite,fromJSON)
+importFrom(readr,read_csv)
