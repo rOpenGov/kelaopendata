@@ -1,0 +1,176 @@
+---
+title: "Read dataset from original csv files using kelaopendata"
+author: "Markus Kainu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Geocoding with R and geofi}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE, 
+  warning = FALSE,
+  fig.height = 7,  
+  fig.width = 7,
+  dpi = 75
+)
+```
+
+
+**Installation**
+
+`kelaopendata` can be installed from Github using
+
+```{r, eval = FALSE}
+# Install development version from GitHub
+remotes::install_github("ropengov/kelaopendata")
+```
+
+```{r}
+# Let's first create a function that checks if the suggested 
+# packages are available
+check_namespaces <- function(pkgs){
+  return(all(unlist(sapply(pkgs, requireNamespace,quietly = TRUE))))
+}
+```
+
+In this vignette we show an alternative way for downloading dataset from origin csv files available at <https://www.avoindata.fi/data/fi/organization/kela> using `get_data_csv()`-function. This method does not allow sql-operations on the fly, as does `get_data()`-function, so you have to download the whole dataset. However, if you have issues with Apache Arrow or Duckdb, or you only have internet access to avoindata.fi, this is an alternative, though slower and requires more memory.
+
+We will implement the same task as in [Fetching data using kelaopendata](https://ropengov.github.io/kelaopendata/articles/read_data.html)-vignette.
+
+
+## List available datasets
+
+```{r}
+library(kelaopendata)
+library(dplyr)
+
+dsets <- list_datasets()
+print(dsets, n = 50)
+```
+
+## Obtaining data on Financial aid for students (opintotuki)
+
+### Metadata
+
+For this example we choose "Financial aid for students" as our benefit of interest.  First we download the metadata and print the description field
+
+```{r}
+d_id <- dsets[dsets$name == "opintotuen-saajat-ja-maksetut-tuet", ]$id
+meta <- get_metadata(data_id = d_id)
+meta$description
+```
+
+And then a more technical overview of the content of data set, containing names of the csv-files, csv-dialect and values and types of each indicator in the data. 
+
+```{r}
+jsonlite::toJSON(meta$resources, pretty = T)
+```
+
+A more dense view of variables and their types and descriptions can be printed with
+
+```{r}
+meta$resources$schema$fields[[1]] |>
+  select(-values) |>
+  as_tibble()
+```
+
+
+
+
+### Quering, downloading and plotting the data
+
+Let's query data on recipients of Student loan in the city of Turku using `kelaopendata::get_data()`-function
+
+```{r}
+d_raw <- kelaopendata::get_data_csv(data_id = d_id)
+d_opintotuki <- d_raw %>% 
+  filter(etuus == 'Opintolainan valtiontakaus',
+         aikatyyppi == 'Vuosi',
+         kunta_nimi == 'Turku',
+         etuus == 'Opintolainan valtiontakaus',
+         oppilaitos_peruste == 'Viimeisin oppilaitos')
+```
+
+Next, let's filter the data locally in R a bit more.
+
+```{r}
+d_plot <- d_opintotuki %>%
+  # Exclude
+  filter(sukupuoli != "Tuntematon",!oppilaitosaste %in% c("Tieto puuttuu", "Yhteensä")) %>%
+  mutate(oppilaitosaste = factor(
+    oppilaitosaste,
+    levels = c(
+      "Yliopistot",
+      "Ammattikorkeakoulut",
+      "Ammatilliset oppilaitokset",
+      "Lukiot",
+      "Muut oppilaitokset",
+      "Ulkomaiset oppilaitokset"
+    )
+  ))
+```
+
+
+Finally, let's draw a plot on recipients by gender and type of institution
+
+
+```{r, fig.width=8, fig.height=12}
+library(ggplot2)
+ggplot(d_plot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) +
+  geom_col(position = position_stack()) +
+  facet_grid(oppilaitosaste ~ sukupuoli) +
+  labs(title = "Recipients of government guarantee for a student loan in\nthe city of Turku in 2004 to 2024 by gender and type of institution") +
+  theme_light()
+```
+
+
+
+
+```{r}
+d_opintotuki <- d_raw %>% 
+  filter(etuus == 'Opintolainan valtiontakaus',
+         aikatyyppi == 'Vuosi',
+         vuosi == 2023,
+         etuus == 'Opintolainan valtiontakaus',
+         oppilaitos_peruste == 'Viimeisin oppilaitos')
+d_opintotuki
+
+library(geofi)
+muni <- get_municipalities()
+```
+
+Next, let's filter the data locally in R a bit more.
+
+```{r}
+d_plot <- d_opintotuki %>% #count(sukupuoli)
+  # Exclude
+  filter(sukupuoli != "Tuntematon",!oppilaitosaste %in% c("Tieto puuttuu", "Yhteensä")) %>%
+  filter(oppilaitosaste == "Yliopistot",
+         !is.na(sukupuoli)) %>% 
+  group_by(kunta_nro,sukupuoli) %>% 
+  summarise(saaja_lkm = sum(saaja_lkm)) %>% 
+  ungroup() %>% 
+  mutate(municipality_code = as.integer(kunta_nro))
+d_plot_sf <- left_join(muni,d_plot)
+```
+
+
+Finally, let's draw a plot on recipients by gender and type of institution
+
+
+```{r, fig.width=8, fig.height=12}
+library(ggplot2)
+ggplot(d_plot_sf, aes(fill = saaja_lkm)) +
+  geom_sf() +
+  facet_wrap(~ sukupuoli) +
+  theme_light()
+```
+

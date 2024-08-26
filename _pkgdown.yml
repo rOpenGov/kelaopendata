@@ -4,6 +4,15 @@ navbar:
     href: https://ropengov.org
   - icon: fab fa-github
     href: https://github.com/rOpenGov/kelaopendata
+  left:
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: Fetching data using kelaopendata
+      href: articles/read_data.html
+    - text: Read dataset from original csv files using kelaopendata
+      href: articles/read_data_csv.html
 url: https://ropengov.github.io/kelaopendata/
 template:
   package: rogtemplate

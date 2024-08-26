@@ -36,6 +36,9 @@ get_data <- function(data_id, sql = NA){
 
 #' Download the whole data set using csv-files
 #'
+#' This is useful when your system has issues either with Arrow or Duckdb,
+#' or you only have internet access to original source avoindata.fi
+#'
 #' @param data_id data id
 #'
 #' @return tibble
