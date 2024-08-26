@@ -1,45 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/404.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/articles/read_data.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/get_csv_links.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/get_data.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/get_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/hello.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/list_ckan.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/list_datasets.html</loc>
-  </url>
-  <url>
-    <loc>https://ropengov.github.io/kelaopendata/reference/pick_a_pkg.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://ropengov.github.io/kelaopendata/404.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/LICENSE-text.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/articles/index.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/articles/read_data.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/articles/read_data_csv.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/authors.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/index.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/get_csv_links.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/get_data.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/get_data_csv.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/get_metadata.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/hello.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/index.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/list_ckan.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/list_datasets.html</loc></url>
+<url><loc>https://ropengov.github.io/kelaopendata/reference/pick_a_pkg.html</loc></url>
 </urlset>
+
