@@ -129,3 +129,49 @@ ggplot(d_plot, aes(x = vuosi, y = saaja_lkm, fill = ikaryhma)) +
   theme_light()
 ```
 
+
+
+
+```{r}
+d_opintotuki <- kelaopendata::get_data(
+  data_id = d_id,
+  sql = "WHERE etuus = 'Opintolainan valtiontakaus' AND
+                            aikatyyppi = 'Vuosi' AND
+                            vuosi = '2023' AND
+                            etuus = 'Opintolainan valtiontakaus' AND
+                            oppilaitos_peruste = 'Viimeisin oppilaitos'
+                           "
+)
+d_opintotuki
+
+library(geofi)
+muni <- get_municipalities()
+```
+
+Next, let's filter the data locally in R a bit more.
+
+```{r}
+d_plot <- d_opintotuki %>%
+  # Exclude
+  filter(sukupuoli != "Tuntematon",!oppilaitosaste %in% c("Tieto puuttuu", "Yhteensä")) %>%
+  filter(oppilaitosaste == "Yliopistot",
+         !is.na(sukupuoli)) %>% 
+  group_by(kunta_nro,sukupuoli) %>% 
+  summarise(saaja_lkm = sum(saaja_lkm)) %>% 
+  ungroup() %>% 
+  mutate(municipality_code = as.integer(kunta_nro))
+d_plot_sf <- left_join(muni,d_plot)
+```
+
+
+Finally, let's draw a plot on recipients by gender and type of institution
+
+
+```{r, fig.width=8, fig.height=12}
+library(ggplot2)
+ggplot(d_plot_sf, aes(fill = saaja_lkm)) +
+  geom_sf() +
+  facet_wrap(~ sukupuoli) +
+  theme_light()
+```
+
