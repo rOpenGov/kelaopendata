@@ -47,6 +47,9 @@ Print first 10 rows of most recently updated data that is `r kelaopendata::get_m
 kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
 ```
 
+Also, there is a web application at <https://kelaopendata.vaphana.com/> that can be used to browse this data resource.
+
+
 ## Disclaimer
 
 This package is in no way officially related to or endorsed by KELA.
