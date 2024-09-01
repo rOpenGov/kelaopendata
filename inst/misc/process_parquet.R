@@ -2,7 +2,7 @@ library(ckanr)
 library(dplyr)
 library(kelaopendata)
 datasets <- list_ckan()
-
+dir.create("./inst/data-parquet/")
 
 n_datasets <- length(datasets$datasets)
 
