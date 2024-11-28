@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><link href="../deps/KaTex-0.16.10/katex.min.css" rel="stylesheet">
 <script src="../deps/KaTex-0.16.10/katex.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Read dataset from original csv files using kelaopendata">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">kelaopendata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Markus
 Kainu</h4>
             
-            <h4 data-toc-skip class="date">2024-09-01</h4>
+            <h4 data-toc-skip class="date">2024-11-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/kelaopendata/blob/master/vignettes/read_data_csv.Rmd" class="external-link"><code>vignettes/read_data_csv.Rmd</code></a></small>
       <div class="d-none name"><code>read_data_csv.Rmd</code></div>
@@ -106,34 +106,35 @@ data using kelaopendata</a>-vignette.</p>
 <span></span>
 <span><span class="va">dsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dsets</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 25 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 3</span></span></span>
 <span><span class="co">#&gt;    modified   name                                                         id   </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2024-08-26 voimassa-olleet-alkaneet-ja-paattyneet-laakekorvausoikeudet  7083…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2024-08-20 kelan-maksaman-perustoimeentulotuen-menot-ja-palautukset     4b64…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2024-08-15 kuntien-rahoittama-tyomarkkinatuki                           970f…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2024-08-15 maksetut-yleiset-asumistuet1                                 f80f…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2024-08-15 kelan-maksamat-elake-etuudet                                 341d…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2024-08-15 maksetut-takuuelakkeet                                       17cd…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2024-08-15 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2024-08-15 etuuksien-ratkaisut                                          3fec…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2024-08-15 perustoimeentulotuen-saajat                                  af7a…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2024-08-15 takuuelakkeen-saajat-ja-keskimaaraiset-elakkeet              53d5…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 2024-08-15 suomen-elakkeensaajat-ja-keskimaaraiset-elakkeet             e88d…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 2024-08-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-sairauspaary… a2ce…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 2024-08-15 kelan-elake-etuuden-saajat-ja-keskimaaraiset-etuudet         8df7…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 2024-08-15 perustoimeentulotuen-saajakotitaloudet                       802e…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 2024-08-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-diagnooseitt… dd43…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 2024-08-15 vanhempainpaivarahojen-saajat-ja-maksetut-etuudet            fcec…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2024-08-15 tyomarkkinatuen-saajat-tukipaivien-kertyman-ja-korvausperus… 06fc…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2024-08-15 kelan-tyottomyysetuudet-korvausperusteen-mukaan              3080…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2024-08-15 kelan-tyottomyysetuuksien-saajat-kuukauden-lopussa           4378…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 2024-08-15 kunnan-osarahoittaman-tyomarkkinatuen-saajat-ja-maksetut-et… 5dd6…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">21</span> 2024-08-15 koulumatkatuen-saajat-ja-maksetut-tuet                       3937…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">22</span> 2024-08-15 opintotuen-saajat-ja-maksetut-tuet                           6c4d…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">23</span> 2024-08-15 kelan-etuuksien-saajat-ja-maksetut-etuudet                   9af3…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">24</span> 2024-08-15 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">25</span> 2023-06-19 helsingin-seudun-sairastavuusindeksi                         06f6…</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2024-11-15 kuntien-rahoittama-tyomarkkinatuki                           970f…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2024-11-15 maksetut-yleiset-asumistuet1                                 f80f…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2024-11-15 kelan-maksamat-elake-etuudet                                 341d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2024-11-15 maksetut-takuuelakkeet                                       17cd…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2024-11-15 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2024-11-15 etuuksien-ratkaisut                                          3fec…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2024-11-15 perustoimeentulotuen-saajat                                  af7a…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2024-11-15 takuuelakkeen-saajat-ja-keskimaaraiset-elakkeet              53d5…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2024-11-15 kelan-maksaman-perustoimeentulotuen-menot-ja-palautukset     4b64…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2024-11-15 suomen-elakkeensaajat-ja-keskimaaraiset-elakkeet             e88d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 2024-11-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-sairauspaary… a2ce…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 2024-11-15 kelan-elake-etuuden-saajat-ja-keskimaaraiset-etuudet         8df7…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 2024-11-15 perustoimeentulotuen-saajakotitaloudet                       802e…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 2024-11-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-diagnooseitt… dd43…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 2024-11-15 vanhempainpaivarahojen-saajat-ja-maksetut-etuudet            fcec…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 2024-11-15 tyomarkkinatuen-saajat-tukipaivien-kertyman-ja-korvausperus… 06fc…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2024-11-15 kelan-tyottomyysetuudet-korvausperusteen-mukaan              3080…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2024-11-15 kelan-tyottomyysetuuksien-saajat-kuukauden-lopussa           4378…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2024-11-15 kunnan-osarahoittaman-tyomarkkinatuen-saajat-ja-maksetut-et… 5dd6…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 2024-11-15 lastenhoidon-tukien-saajat-ja-maksetut-tuet                  eb0c…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">21</span> 2024-11-15 koulumatkatuen-saajat-ja-maksetut-tuet                       3937…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">22</span> 2024-11-15 opintotuen-saajat-ja-maksetut-tuet                           6c4d…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">23</span> 2024-11-15 kelan-etuuksien-saajat-ja-maksetut-etuudet                   9af3…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">24</span> 2024-11-15 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">25</span> 2024-08-26 voimassa-olleet-alkaneet-ja-paattyneet-laakekorvausoikeudet  7083…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">26</span> 2023-06-19 helsingin-seudun-sairastavuusindeksi                         06f6…</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="obtaining-data-on-financial-aid-for-students-opintotuki">Obtaining data on Financial aid for students (opintotuki)<a class="anchor" aria-label="anchor" href="#obtaining-data-on-financial-aid-for-students-opintotuki"></a>
@@ -184,7 +185,7 @@ each indicator in the data.</p>
 <span><span class="co">#&gt;           "name": "vuosikuukausi",</span></span>
 <span><span class="co">#&gt;           "type": "integer",</span></span>
 <span><span class="co">#&gt;           "format": "default",</span></span>
-<span><span class="co">#&gt;           "values": [200512, 200607, 200612, 200707, 200712, 200807, 200812, 200907, 200912, 201007, 201012, 201107, 201112, 201207, 201212, 201307, 201312, 201407, 201412, 201507, 201512, 201607, 201612, 201707, 201712, 201801, 201802, 201803, 201804, 201805, 201806, 201807, 201808, 201809, 201810, 201811, 201812, 201901, 201902, 201903, 201904, 201905, 201906, 201907, 201908, 201909, 201910, 201911, 201912, 202001, 202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012, 202101, 202102, 202103, 202104, 202105, 202106, 202107, 202108, 202109, 202110, 202111, 202112, 202201, 202202, 202203, 202204, 202205, 202206, 202207, 202208, 202209, 202210, 202211, 202212, 202301, 202302, 202303, 202304, 202305, 202306, 202307, 202308, 202309, 202310, 202311, 202312, 202401, 202402, 202403, 202404, 202405, 202406, 202407],</span></span>
+<span><span class="co">#&gt;           "values": [200512, 200607, 200612, 200707, 200712, 200807, 200812, 200907, 200912, 201007, 201012, 201107, 201112, 201207, 201212, 201307, 201312, 201407, 201412, 201507, 201512, 201607, 201612, 201707, 201712, 201801, 201802, 201803, 201804, 201805, 201806, 201807, 201808, 201809, 201810, 201811, 201812, 201901, 201902, 201903, 201904, 201905, 201906, 201907, 201908, 201909, 201910, 201911, 201912, 202001, 202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012, 202101, 202102, 202103, 202104, 202105, 202106, 202107, 202108, 202109, 202110, 202111, 202112, 202201, 202202, 202203, 202204, 202205, 202206, 202207, 202208, 202209, 202210, 202211, 202212, 202301, 202302, 202303, 202304, 202305, 202306, 202307, 202308, 202309, 202310, 202311, 202312, 202401, 202402, 202403, 202404, 202405, 202406, 202407, 202408, 202409, 202410],</span></span>
 <span><span class="co">#&gt;           "description": "Maksuvuosi ja kuukausi, muotoa VVVVKK."</span></span>
 <span><span class="co">#&gt;         },</span></span>
 <span><span class="co">#&gt;         {</span></span>
@@ -354,7 +355,7 @@ institution</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
