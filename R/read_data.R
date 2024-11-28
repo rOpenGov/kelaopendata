@@ -22,7 +22,7 @@
 get_data <- function(data_id, sql = NA){
 
   con <- dbConnect(duckdb())
-  dbExecute(con, "FORCE INSTALL httpfs")
+  dbExecute(con, "FORCE INSTALL httpfs from core_nightly;")
   dbExecute(con, "LOAD httpfs")
   dbGetQuery(con,
              glue::glue("SELECT *

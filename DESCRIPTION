@@ -1,8 +1,8 @@
 Package: kelaopendata
 Type: Package
 Title: Access open data from National social insurance institution of Finland
-Version: 0.1.1
-Date: 2024-08-26
+Version: 0.1.1001
+Date: 2024-11-28
 Author: Markus Kainu
 Maintainer: Markus Kainu <markus.kainu@kapsi.fi>
 Description: Designed to simplify and speed up access to open data from National social insurance institution of Finland (KELA) published at <https://www.avoindata.fi/data/fi/organization/kela>, the kelaopendata package offers researchers and analysts a set of tools to obtain data and metadata for a wide range of applications.
