@@ -10,7 +10,7 @@ for (i in seq(n_datasets)){
   print(i)
   id <- datasets$datasets[[i]]
   pkg_lst <- pick_a_pkg(input_dataset = id)
-
+  if (length(pkg_lst$pkg$resources) == 0) next()
   csv_links <- get_csv_links(pkg_lst = pkg_lst)
   json_link <- pkg_lst$pkg$resources[[pkg_lst$json_nr]]$url
 
