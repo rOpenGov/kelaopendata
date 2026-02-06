@@ -1,6 +1,6 @@
-# List published data in avoindata.fi CKAN
+# List published data in avoindata.suomi.fi CKAN
 
-List published data in avoindata.fi CKAN
+List published data in avoindata.suomi.fi CKAN
 
 ## Usage
 

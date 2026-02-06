@@ -13,7 +13,7 @@
 - [`hello()`](https://ropengov.github.io/kelaopendata/reference/hello.md)
   : Hello, World!
 - [`list_ckan()`](https://ropengov.github.io/kelaopendata/reference/list_ckan.md)
-  : List published data in avoindata.fi CKAN
+  : List published data in avoindata.suomi.fi CKAN
 - [`list_datasets()`](https://ropengov.github.io/kelaopendata/reference/list_datasets.md)
   : List datasets
 - [`pick_a_pkg()`](https://ropengov.github.io/kelaopendata/reference/pick_a_pkg.md)

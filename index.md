@@ -3,7 +3,7 @@
 Finnish national social insurance institution
 [Kela](https://www.kela.fi/) publishes open data on recipients,
 reimbursements and costs of various social security benefits in Finland
-at <https://www.avoindata.fi/data/fi/organization/kela>.
+at <https://avoindata.suomi.fi/data/fi/organization/kela>.
 `kelaopendata`-package takes advantage of modern big data technologies
 such as [duckdb](https://duckdb.org/) and [Apache
 Parquet](https://parquet.apache.org/) and provides fast and

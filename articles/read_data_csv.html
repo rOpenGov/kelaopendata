@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">kelaopendata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
                         <h4 data-toc-skip class="author">Markus
 Kainu</h4>
             
-            <h4 data-toc-skip class="date">2026-02-04</h4>
+            <h4 data-toc-skip class="date">2026-02-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rOpenGov/kelaopendata/blob/master/vignettes/read_data_csv.Rmd" class="external-link"><code>vignettes/read_data_csv.Rmd</code></a></small>
       <div class="d-none name"><code>read_data_csv.Rmd</code></div>
@@ -84,13 +84,13 @@ Kainu</h4>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">requireNamespace</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>In this vignette we show an alternative way for downloading dataset
-from origin csv files available at <a href="https://www.avoindata.fi/data/fi/organization/kela" class="external-link uri">https://www.avoindata.fi/data/fi/organization/kela</a> using
-<code><a href="../reference/get_data_csv.html">get_data_csv()</a></code>-function. This method does not allow
+from origin csv files available at <a href="https://avoindata.suomi.fi/data/fi/organization/kela" class="external-link uri">https://avoindata.suomi.fi/data/fi/organization/kela</a>
+using <code><a href="../reference/get_data_csv.html">get_data_csv()</a></code>-function. This method does not allow
 sql-operations on the fly, as does <code><a href="../reference/get_data.html">get_data()</a></code>-function, so
 you have to download the whole dataset. However, if you have issues with
 Apache Arrow or Duckdb, or you only have internet access to
-avoindata.fi, this is an alternative, though slower and requires more
-memory.</p>
+avoindata.suomi.fi, this is an alternative, though slower and requires
+more memory.</p>
 <p>We will implement the same task as in <a href="https://ropengov.github.io/kelaopendata/articles/read_data.html">Fetching
 data using kelaopendata</a>-vignette.</p>
 <div class="section level2">
