@@ -41,7 +41,7 @@ check_namespaces <- function(pkgs){
 }
 ```
 
-In this vignette we show an alternative way for downloading dataset from origin csv files available at <https://www.avoindata.fi/data/fi/organization/kela> using `get_data_csv()`-function. This method does not allow sql-operations on the fly, as does `get_data()`-function, so you have to download the whole dataset. However, if you have issues with Apache Arrow or Duckdb, or you only have internet access to avoindata.fi, this is an alternative, though slower and requires more memory.
+In this vignette we show an alternative way for downloading dataset from origin csv files available at <https://avoindata.suomi.fi/data/fi/organization/kela> using `get_data_csv()`-function. This method does not allow sql-operations on the fly, as does `get_data()`-function, so you have to download the whole dataset. However, if you have issues with Apache Arrow or Duckdb, or you only have internet access to avoindata.suomi.fi, this is an alternative, though slower and requires more memory.
 
 We will implement the same task as in [Fetching data using kelaopendata](https://ropengov.github.io/kelaopendata/articles/read_data.html)-vignette.
 

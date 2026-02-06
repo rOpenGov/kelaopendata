@@ -1,5 +1,5 @@
 
-#' List published data in avoindata.fi CKAN
+#' List published data in avoindata.suomi.fi CKAN
 #'
 #' @param org organisation to get listning from
 #' @param n number of hits
@@ -18,7 +18,7 @@
 #'
 list_ckan <- function(org = "Kansaneläkelaitos", n = 100){
 
-  ckanr::ckanr_setup(url = "https://www.avoindata.fi/data/fi/")
+  ckanr::ckanr_setup(url = "https://avoindata.suomi.fi/data/fi/")
   x <- ckanr::package_search(q = org, rows = n)
 
   count <- x$count

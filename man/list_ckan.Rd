@@ -2,7 +2,7 @@
 % Please edit documentation in R/ckan.R
 \name{list_ckan}
 \alias{list_ckan}
-\title{List published data in avoindata.fi CKAN}
+\title{List published data in avoindata.suomi.fi CKAN}
 \usage{
 list_ckan(org = "Kansaneläkelaitos", n = 100)
 }
@@ -15,5 +15,5 @@ list_ckan(org = "Kansaneläkelaitos", n = 100)
 data.frame
 }
 \description{
-List published data in avoindata.fi CKAN
+List published data in avoindata.suomi.fi CKAN
 }
