@@ -10,8 +10,6 @@
   : Download the whole data set using csv-files
 - [`get_metadata()`](https://ropengov.github.io/kelaopendata/reference/get_metadata.md)
   : Download metadata
-- [`hello()`](https://ropengov.github.io/kelaopendata/reference/hello.md)
-  : Hello, World!
 - [`list_ckan()`](https://ropengov.github.io/kelaopendata/reference/list_ckan.md)
   : List published data in avoindata.suomi.fi CKAN
 - [`list_datasets()`](https://ropengov.github.io/kelaopendata/reference/list_datasets.md)
