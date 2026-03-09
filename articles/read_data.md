@@ -84,7 +84,7 @@ jsonlite::toJSON(meta$resources, pretty = T)
 #> [
 #>   {
 #>     "name": "opintotuen-saajat-ja-maksetut-tuet",
-#>     "path": ["data_2005_2017.csv", "data_2018.csv", "data_2019.csv", "data_2020.csv", "data_2021.csv", "data_2022.csv", "data_2023.csv", "data_2024.csv", "data_2025.csv"],
+#>     "path": ["data_2005_2017.csv", "data_2018.csv", "data_2019.csv", "data_2020.csv", "data_2021.csv", "data_2022.csv", "data_2023.csv", "data_2024.csv", "data_2025.csv", "data_2026.csv"],
 #>     "format": "csv",
 #>     "dialect": {
 #>       "delimiter": ","
@@ -111,14 +111,14 @@ jsonlite::toJSON(meta$resources, pretty = T)
 #>           "name": "vuosikuukausi",
 #>           "type": "integer",
 #>           "format": "default",
-#>           "values": [200512, 200607, 200612, 200707, 200712, 200807, 200812, 200907, 200912, 201007, 201012, 201107, 201112, 201207, 201212, 201307, 201312, 201407, 201412, 201507, 201512, 201607, 201612, 201707, 201712, 201801, 201802, 201803, 201804, 201805, 201806, 201807, 201808, 201809, 201810, 201811, 201812, 201901, 201902, 201903, 201904, 201905, 201906, 201907, 201908, 201909, 201910, 201911, 201912, 202001, 202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012, 202101, 202102, 202103, 202104, 202105, 202106, 202107, 202108, 202109, 202110, 202111, 202112, 202201, 202202, 202203, 202204, 202205, 202206, 202207, 202208, 202209, 202210, 202211, 202212, 202301, 202302, 202303, 202304, 202305, 202306, 202307, 202308, 202309, 202310, 202311, 202312, 202401, 202402, 202403, 202404, 202405, 202406, 202407, 202408, 202409, 202410, 202411, 202412, 202501, 202502, 202503, 202504, 202505, 202506, 202507, 202508, 202509],
+#>           "values": [200512, 200607, 200612, 200707, 200712, 200807, 200812, 200907, 200912, 201007, 201012, 201107, 201112, 201207, 201212, 201307, 201312, 201407, 201412, 201507, 201512, 201607, 201612, 201707, 201712, 201801, 201802, 201803, 201804, 201805, 201806, 201807, 201808, 201809, 201810, 201811, 201812, 201901, 201902, 201903, 201904, 201905, 201906, 201907, 201908, 201909, 201910, 201911, 201912, 202001, 202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012, 202101, 202102, 202103, 202104, 202105, 202106, 202107, 202108, 202109, 202110, 202111, 202112, 202201, 202202, 202203, 202204, 202205, 202206, 202207, 202208, 202209, 202210, 202211, 202212, 202301, 202302, 202303, 202304, 202305, 202306, 202307, 202308, 202309, 202310, 202311, 202312, 202401, 202402, 202403, 202404, 202405, 202406, 202407, 202408, 202409, 202410, 202411, 202412, 202501, 202502, 202503, 202504, 202505, 202506, 202507, 202508, 202509, 202510, 202511, 202512, 202601],
 #>           "description": "Maksuvuosi ja kuukausi, muotoa VVVVKK."
 #>         },
 #>         {
 #>           "name": "vuosi",
 #>           "type": "integer",
 #>           "format": "default",
-#>           "values": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+#>           "values": [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
 #>           "description": "Maksuvuosi."
 #>         },
 #>         {
@@ -174,14 +174,14 @@ jsonlite::toJSON(meta$resources, pretty = T)
 #>           "name": "saaja_lkm",
 #>           "type": "number",
 #>           "format": "default",
-#>           "values": [0, 34176],
+#>           "values": [0, 15666],
 #>           "description": "Saajien lukumäärä"
 #>         },
 #>         {
 #>           "name": "saaja_laskenta_lkm",
 #>           "type": "number",
 #>           "format": "default",
-#>           "values": [0, 30341],
+#>           "values": [0, 15628],
 #>           "description": "Keskimääräisen etuuden laskentaan tarvittava saajamäärä tarkastelujakson aikana."
 #>         },
 #>         {
@@ -195,7 +195,7 @@ jsonlite::toJSON(meta$resources, pretty = T)
 #>           "name": "maksettu_laskenta_eur",
 #>           "type": "number",
 #>           "format": "default",
-#>           "values": [0, 119562020.96],
+#>           "values": [0, 128082527.65],
 #>           "description": "Keskimääräisen etuuden laskentaan tarvittava euromäärä tarkastelujakson aikana."
 #>         }
 #>       ],
@@ -250,20 +250,20 @@ d_opintotuki <- kelaopendata::get_data(
                            "
 )
 d_opintotuki
-#> # A tibble: 1,723 × 15
+#> # A tibble: 1,815 × 15
 #>    aikatyyppi kuukausi_nro vuosikuukausi vuosi kunta_nro kunta_nimi ikaryhma    
 #>    <chr>             <dbl>         <dbl> <dbl> <chr>     <chr>      <chr>       
-#>  1 Vuosi                12        202412  2024 853       Turku      Tieto puutt…
-#>  2 Vuosi                12        202412  2024 853       Turku      Tieto puutt…
-#>  3 Vuosi                12        202412  2024 853       Turku      Tieto puutt…
-#>  4 Vuosi                12        202412  2024 853       Turku      Tieto puutt…
-#>  5 Vuosi                12        202412  2024 853       Turku      55-         
-#>  6 Vuosi                12        202412  2024 853       Turku      55-         
-#>  7 Vuosi                12        202412  2024 853       Turku      55-         
-#>  8 Vuosi                12        202412  2024 853       Turku      55-         
-#>  9 Vuosi                12        202412  2024 853       Turku      55-         
-#> 10 Vuosi                12        202412  2024 853       Turku      55-         
-#> # ℹ 1,713 more rows
+#>  1 Vuosi                12        202512  2025 853       Turku      Tieto puutt…
+#>  2 Vuosi                12        202512  2025 853       Turku      Tieto puutt…
+#>  3 Vuosi                12        202512  2025 853       Turku      55-         
+#>  4 Vuosi                12        202512  2025 853       Turku      55-         
+#>  5 Vuosi                12        202512  2025 853       Turku      55-         
+#>  6 Vuosi                12        202512  2025 853       Turku      55-         
+#>  7 Vuosi                12        202512  2025 853       Turku      55-         
+#>  8 Vuosi                12        202512  2025 853       Turku      55-         
+#>  9 Vuosi                12        202512  2025 853       Turku      55-         
+#> 10 Vuosi                12        202512  2025 853       Turku      55-         
+#> # ℹ 1,805 more rows
 #> # ℹ 8 more variables: sukupuoli <chr>, etuus <chr>, oppilaitos_peruste <chr>,
 #> #   oppilaitosaste <chr>, saaja_lkm <dbl>, saaja_laskenta_lkm <dbl>,
 #> #   maksettu_eur <dbl>, maksettu_laskenta_eur <dbl>
