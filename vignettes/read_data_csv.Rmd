@@ -4,7 +4,7 @@ author: "Markus Kainu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Geocoding with R and geofi}
+  %\VignetteIndexEntry{Read dataset from original CSV files using kelaopendata}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 
 **Installation**
 
-`kelaopendata` can be installed from Github using
+`kelaopendata` can be installed from GitHub using
 
 ```{r, eval = FALSE}
 # Install development version from GitHub
@@ -41,7 +41,7 @@ check_namespaces <- function(pkgs){
 }
 ```
 
-In this vignette we show an alternative way for downloading dataset from origin csv files available at <https://avoindata.suomi.fi/data/fi/organization/kela> using `get_data_csv()`-function. This method does not allow sql-operations on the fly, as does `get_data()`-function, so you have to download the whole dataset. However, if you have issues with Apache Arrow or Duckdb, or you only have internet access to avoindata.suomi.fi, this is an alternative, though slower and requires more memory.
+In this vignette we show an alternative way to download datasets from original CSV files available at <https://avoindata.suomi.fi/data/fi/organization/kela> using the `get_data_csv()` function. This method does not allow SQL operations on the fly like the `get_data()` function, so you must download the entire dataset. However, if you have issues with Apache Arrow or DuckDB, or only have internet access to avoindata.suomi.fi, this is an alternative, though it is slower and requires more memory.
 
 We will implement the same task as in [Fetching data using kelaopendata](https://ropengov.github.io/kelaopendata/articles/read_data.html)-vignette.
 
@@ -68,7 +68,7 @@ meta <- get_metadata(data_id = d_id)
 meta$description
 ```
 
-And then a more technical overview of the content of data set, containing names of the csv-files, csv-dialect and values and types of each indicator in the data. 
+Then a more technical overview of the dataset, containing names of the CSV files, CSV dialect, and values and types of each indicator in the data.
 
 ```{r}
 jsonlite::toJSON(meta$resources, pretty = T)
@@ -85,9 +85,9 @@ meta$resources$schema$fields[[1]] |>
 
 
 
-### Quering, downloading and plotting the data
+### Querying, downloading and plotting the data
 
-Let's query data on recipients of Student loan in the city of Turku using `kelaopendata::get_data()`-function
+Let's get data on recipients of student loans in the city of Turku using `kelaopendata::get_data()` function.
 
 ```{r}
 d_raw <- kelaopendata::get_data_csv(data_id = d_id)

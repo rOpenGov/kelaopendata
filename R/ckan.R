@@ -79,10 +79,10 @@ list_datasets <- function(){
 #' @return list
 #' @export
 #'
-pick_a_pkg <- function(input_dataset = "8df7939b-6c0e-4587-9aa1-95c076e7b0a3"){
+pick_a_pkg <- function(input_dataset = "a11f9ec3-669a-4242-bd30-f133a334901b"){
 
   res <- list_ckan()
-  # input_dataset <- "8df7939b-6c0e-4587-9aa1-95c076e7b0a3"
+  # input_dataset <- "a11f9ec3-669a-4242-bd30-f133a334901b"
   nro <- lapply(res$results, function(x)x$id %in% input_dataset) |> unlist() |> which()
   pkg <- res$results[[nro]]
   # mikä on json-resurssi
