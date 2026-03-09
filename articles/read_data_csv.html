@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">kelaopendata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@ Kainu</h4>
     
     
 <p><strong>Installation</strong></p>
-<p><code>kelaopendata</code> can be installed from Github using</p>
+<p><code>kelaopendata</code> can be installed from GitHub using</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install development version from GitHub</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropengov/kelaopendata"</span><span class="op">)</span></span></code></pre></div>
@@ -95,14 +95,14 @@ Kainu</h4>
 <span><span class="va">check_namespaces</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pkgs</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">requireNamespace</span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>In this vignette we show an alternative way for downloading dataset
-from origin csv files available at <a href="https://avoindata.suomi.fi/data/fi/organization/kela" class="external-link uri">https://avoindata.suomi.fi/data/fi/organization/kela</a>
-using <code><a href="../reference/get_data_csv.html">get_data_csv()</a></code>-function. This method does not allow
-sql-operations on the fly, as does <code><a href="../reference/get_data.html">get_data()</a></code>-function, so
-you have to download the whole dataset. However, if you have issues with
-Apache Arrow or Duckdb, or you only have internet access to
-avoindata.suomi.fi, this is an alternative, though slower and requires
-more memory.</p>
+<p>In this vignette we show an alternative way to download datasets from
+original CSV files available at <a href="https://avoindata.suomi.fi/data/fi/organization/kela" class="external-link uri">https://avoindata.suomi.fi/data/fi/organization/kela</a>
+using the <code><a href="../reference/get_data_csv.html">get_data_csv()</a></code> function. This method does not
+allow SQL operations on the fly like the <code><a href="../reference/get_data.html">get_data()</a></code>
+function, so you must download the entire dataset. However, if you have
+issues with Apache Arrow or DuckDB, or only have internet access to
+avoindata.suomi.fi, this is an alternative, though it is slower and
+requires more memory.</p>
 <p>We will implement the same task as in <a href="https://ropengov.github.io/kelaopendata/articles/read_data.html">Fetching
 data using kelaopendata</a>-vignette.</p>
 <div class="section level2">
@@ -162,9 +162,9 @@ description field</p>
 <span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metadata.html">get_metadata</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">d_id</span><span class="op">)</span></span>
 <span><span class="va">meta</span><span class="op">$</span><span class="va">description</span></span>
 <span><span class="co">#&gt; [1] "Tämä tietoaineisto liittyy Kelan tilastotietokanta Kelaston dynaamiseen raporttiin Opintotuen saajat ja maksetut tuet.  \n\nAineistossa on tiedot opintotuen saajista, maksetuista tuista ja keskimääräisistä tuista tilastointijakson aikana. Opintotuen saajia ovat henkilöt, joille on maksettu tilastointijakson aikana säännöllinen tai takautuva opintoraha tai asumislisä, tai joilla on voimassa oleva opintolainan valtiontakaus. Maksettuihin tukiin on tilastoitu säännöllisten tai takautuvien maksujen lisäksi myös opintoetuuksien palautukset. Keskimääräiseen opintotukeen (euroa/saaja) on tilastoitu ainoastaan säännöllisesti maksetut tuet ja opintolainan valtiontakauksen euromäärä.\n\nOpintotuen saajat ja maksetut etuudet tilastoidaan kalenterivuosittain, lukuvuosittain ja kuukausittain. Lukuvuosi alkaa elokuun alussa ja päättyy seuraavan vuoden heinäkuun lopussa. Aineistossa on tietoja vuositasolla vuodesta 2005 alkaen, kuukausitasolla vuodesta 2018 alkaen ja lukuvuositasolla 2005/2006 alkaen.\n\nOppilaitosaste määräytyy etuuden maksutapahtumaan liittyvän oppilaitosnumeron perusteella. Oletusarvoisesti opintotuen saaja tilastoituu tilastointijakson viimeisimmän maksutapahtuman mukaiseen oppilaitosasteeseen. Valinnalla \"Astetiedon peruste: Kaikki oppilaitokset\" tuen saaja tilastoituu kaikkiin tilastointijakson maksutapahtumien mukaisiin oppilaitosasteisiin. Yhteissummassa tuen saaja esiintyy kuitenkin vain kerran.\n\nOppilaitosasteeseen \"Ulkomaiset oppilaitokset\" tilastoituvat ne opintotuen saajat, jotka suorittavat tutkintoa ulkomaisessa oppilaitoksessa.\n\nOpintotuen saajan ikä ja asuinkunta tilastoituvat valitun ajanjakson lopun tietojen mukaisesti. Lukuvuoden tiedoissa ikä ja asuinkunta ovat kuitenkin  lukuvuoteen sisältyvän syyslukukauden lopun tieto."</span></span></code></pre></div>
-<p>And then a more technical overview of the content of data set,
-containing names of the csv-files, csv-dialect and values and types of
-each indicator in the data.</p>
+<p>Then a more technical overview of the dataset, containing names of
+the CSV files, CSV dialect, and values and types of each indicator in
+the data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html" class="external-link">toJSON</a></span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">resources</span>, pretty <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [</span></span>
@@ -316,10 +316,10 @@ be printed with</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> maksettu_laskenta_eur number  default <span style="color: #949494;">"</span>Keskimääräisen etuuden laskentaan tar…</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="quering-downloading-and-plotting-the-data">Quering, downloading and plotting the data<a class="anchor" aria-label="anchor" href="#quering-downloading-and-plotting-the-data"></a>
+<h3 id="querying-downloading-and-plotting-the-data">Querying, downloading and plotting the data<a class="anchor" aria-label="anchor" href="#querying-downloading-and-plotting-the-data"></a>
 </h3>
-<p>Let’s query data on recipients of Student loan in the city of Turku
-using <code><a href="../reference/get_data.html">kelaopendata::get_data()</a></code>-function</p>
+<p>Let’s get data on recipients of student loans in the city of Turku
+using <code><a href="../reference/get_data.html">kelaopendata::get_data()</a></code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d_raw</span> <span class="op">&lt;-</span> <span class="fu">kelaopendata</span><span class="fu">::</span><span class="fu"><a href="../reference/get_data_csv.html">get_data_csv</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">d_id</span><span class="op">)</span></span>
 <span><span class="va">d_opintotuki</span> <span class="op">&lt;-</span> <span class="va">d_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>

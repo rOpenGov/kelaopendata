@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">kelaopendata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,8 +79,8 @@
 <img src="logo.png" class="logo" alt=""><h1 id="kelaopendata---access-open-data-from-national-social-insurance-institution-of-finland">kelaopendata - Access open data from National social insurance institution of Finland<a class="anchor" aria-label="anchor" href="#kelaopendata---access-open-data-from-national-social-insurance-institution-of-finland"></a>
 </h1>
 </div>
-<p>Finnish national social insurance institution <a href="https://www.kela.fi/" class="external-link">Kela</a> publishes open data on recipients, reimbursements and costs of various social security benefits in Finland at <a href="https://avoindata.suomi.fi/data/fi/organization/kela" class="external-link uri">https://avoindata.suomi.fi/data/fi/organization/kela</a>. <code>kelaopendata</code>-package takes advantage of modern big data technologies such as <a href="https://duckdb.org/" class="external-link">duckdb</a> and <a href="https://parquet.apache.org/" class="external-link">Apache Parquet</a> and provides fast and straightforward access to data.</p>
-<p>Below is a one example on how you can access data using <code>kelaopendata</code>. Please have a closer look at the <a href="https://ropengov.github.io/kelaopendata/articles/index.html">vignettes</a> for more comprehensive use cases.</p>
+<p>Finnish national social insurance institution <a href="https://www.kela.fi/" class="external-link">Kela</a> publishes open data on recipients, reimbursements and costs of various social security benefits in Finland at <a href="https://avoindata.suomi.fi/data/fi/organization/kela" class="external-link uri">https://avoindata.suomi.fi/data/fi/organization/kela</a>. <code>kelaopendata</code> package utilizes modern big data technologies such as <a href="https://duckdb.org/" class="external-link">duckdb</a> and <a href="https://parquet.apache.org/" class="external-link">Apache Parquet</a> and provides fast and straightforward access to data.</p>
+<p>Below is an example of how you can access data using <code>kelaopendata</code>. Please see the <a href="https://ropengov.github.io/kelaopendata/articles/index.html">vignettes</a> for more comprehensive use cases.</p>
 <div class="section level2">
 <h2 id="installation-and-use">Installation and use<a class="anchor" aria-label="anchor" href="#installation-and-use"></a>
 </h2>
@@ -97,53 +97,59 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ropengov.github.io/kelaopendata/">kelaopendata</a></span><span class="op">)</span></span>
 <span><span class="va">dsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dsets</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## # A tibble: 25 × 3</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## # A tibble: 30 × 3</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="do">##    modified   name                                                         id   </span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">##    &lt;date&gt;     &lt;chr&gt;                                                        &lt;chr&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="do">##  1 2024-08-26 voimassa-olleet-alkaneet-ja-paattyneet-laakekorvausoikeudet  7083…</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">##  2 2024-08-20 kelan-maksaman-perustoimeentulotuen-menot-ja-palautukset     4b64…</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="do">##  3 2024-08-15 kuntien-rahoittama-tyomarkkinatuki                           970f…</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="do">##  4 2024-08-15 maksetut-yleiset-asumistuet1                                 f80f…</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="do">##  5 2024-08-15 kelan-maksamat-elake-etuudet                                 341d…</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="do">##  6 2024-08-15 maksetut-takuuelakkeet                                       17cd…</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="do">##  7 2024-08-15 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="do">##  8 2024-08-15 etuuksien-ratkaisut                                          3fec…</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="do">##  9 2024-08-15 perustoimeentulotuen-saajat                                  af7a…</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="do">## 10 2024-08-15 takuuelakkeen-saajat-ja-keskimaaraiset-elakkeet              53d5…</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="do">## 11 2024-08-15 suomen-elakkeensaajat-ja-keskimaaraiset-elakkeet             e88d…</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="do">## 12 2024-08-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-sairauspaary… a2ce…</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="do">## 13 2024-08-15 kelan-elake-etuuden-saajat-ja-keskimaaraiset-etuudet         8df7…</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="do">## 14 2024-08-15 perustoimeentulotuen-saajakotitaloudet                       802e…</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="do">## 15 2024-08-15 sairauspaivarahojen-saajat-ja-maksetut-etuudet-diagnooseitt… dd43…</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="do">## 16 2024-08-15 vanhempainpaivarahojen-saajat-ja-maksetut-etuudet            fcec…</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="do">## 17 2024-08-15 tyomarkkinatuen-saajat-tukipaivien-kertyman-ja-korvausperus… 06fc…</span></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="do">## 18 2024-08-15 kelan-tyottomyysetuudet-korvausperusteen-mukaan              3080…</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="do">## 19 2024-08-15 kelan-tyottomyysetuuksien-saajat-kuukauden-lopussa           4378…</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="do">## 20 2024-08-15 kunnan-osarahoittaman-tyomarkkinatuen-saajat-ja-maksetut-et… 5dd6…</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## 21 2024-08-15 koulumatkatuen-saajat-ja-maksetut-tuet                       3937…</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="do">## 22 2024-08-15 opintotuen-saajat-ja-maksetut-tuet                           6c4d…</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="do">## 23 2024-08-15 kelan-etuuksien-saajat-ja-maksetut-etuudet                   9af3…</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">## 24 2024-08-15 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…</span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="do">## 25 2023-06-19 helsingin-seudun-sairastavuusindeksi                         06f6…</span></span></code></pre></div>
-<p>Print first 10 rows of most recently updated data that is Voimassa olleet, alkaneet ja päättyneet lääkekorvausoikeudet</p>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="do">##  1 2026-03-02 sairaanhoitokorvausten-saajat-ja-maksetut-korvaukset         2236…</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">##  2 2026-02-26 lastenhoidon-tukien-saajat-ja-maksetut-tuet                  eb0c…</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="do">##  3 2026-02-16 maksetut-yleiset-asumistuet1                                 f80f…</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="do">##  4 2026-02-16 takuuelakkeen-saajat-ja-keskimaaraiset-elakkeet              53d5…</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="do">##  5 2026-02-16 kunnan-osarahoittaman-tyottomyysturvan-saajat-ja-maksetut-e… 6090…</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="do">##  6 2026-02-16 etuuksien-ratkaisun-kooste                                   a11f…</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="do">##  7 2026-02-16 sairauspaivarahojen-saajat-ja-maksetut-etuudet-sairauspaary… a2ce…</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="do">##  8 2026-02-16 kelan-elake-etuuden-saajat-ja-keskimaaraiset-etuudet         8df7…</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="do">##  9 2026-02-16 sairauspaivarahojen-saajat-ja-maksetut-etuudet-diagnooseitt… dd43…</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="do">## 10 2026-02-16 kelan-tyottomyysetuudet-korvausperusteen-mukaan              3080…</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="do">## 11 2026-02-16 kunnan-osarahoittaman-tyottomyysturvan-saajat-ja-maksetut-e… 4eea…</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="do">## 12 2026-02-16 koulumatkatuen-saajat-ja-maksetut-tuet                       3937…</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="do">## 13 2026-02-16 opintotuen-saajat-ja-maksetut-tuet                           6c4d…</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="do">## 14 2026-02-15 kuntien-rahoittama-tyomarkkinatuki                           970f…</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="do">## 15 2026-02-15 kelan-maksamat-elake-etuudet                                 341d…</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="do">## 16 2026-02-15 maksetut-takuuelakkeet                                       17cd…</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="do">## 17 2026-02-15 voimassa-olleet-alkaneet-ja-paattyneet-laakekorvausoikeudet  7083…</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="do">## 18 2026-02-15 suomen-tyokyvyttomyyselakkeensaajat-sairauden-mukaan         8be0…</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="do">## 19 2026-02-15 perustoimeentulotuen-saajat                                  af7a…</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="do">## 20 2026-02-15 kelan-maksaman-perustoimeentulotuen-menot-ja-palautukset     4b64…</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## 21 2026-02-15 suomen-elakkeensaajat-ja-keskimaaraiset-elakkeet             e88d…</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="do">## 22 2026-02-15 perustoimeentulotuen-saajakotitaloudet                       802e…</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="do">## 23 2026-02-15 vanhempainpaivarahojen-saajat-ja-maksetut-etuudet            fcec…</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">## 24 2026-02-15 tyomarkkinatuen-saajat-tukipaivien-kertyman-ja-korvausperus… 06fc…</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="do">## 25 2026-02-15 kunnan-osarahoittaman-tyottomyysturvan-saajat-ja-maksetut-e… 7c07…</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="do">## 26 2026-02-15 kelan-tyottomyysetuuksien-saajat-kuukauden-lopussa           4378…</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="do">## 27 2026-02-15 kunnan-osarahoittaman-tyomarkkinatuen-saajat-ja-maksetut-et… 5dd6…</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="do">## 28 2026-02-15 kelan-etuuksien-saajat-ja-maksetut-etuudet                   9af3…</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="do">## 29 2025-12-11 etuuksien-ratkaisut                                          3fec…</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="do">## 30 2025-05-14 helsingin-seudun-sairastavuusindeksi                         06f6…</span></span></code></pre></div>
+<p>Print first 10 rows of most recently updated data that is Sairaanhoitokorvausten saajat ja maksetut korvaukset</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">kelaopendata</span><span class="fu">::</span><span class="fu"><a href="reference/get_data.html">get_data</a></span><span class="op">(</span>data_id <span class="op">=</span> <span class="va">dsets</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">$</span><span class="va">id</span>, sql <span class="op">=</span> <span class="st">"LIMIT 10"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 10 × 13</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##    aikatyyppi vuosi hyvinvointialue_nro hyvinvointialue_nimi ikaryhma sukupuoli</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;                &lt;chr&gt;    &lt;chr&gt;    </span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">##  1 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">##  2 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">##  3 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">##  4 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">##  5 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">##  6 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">##  7 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">##  8 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##  9 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">## 10 Vuosi       2017 19                  Pohjois-Pohjanmaa    10-14    Mies     </span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">## # ℹ 7 more variables: korvausoikeus_koodi &lt;dbl&gt;, korvausoikeus_selite &lt;chr&gt;,</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">## #   alkanut_lkm &lt;dbl&gt;, kokovuosi_lkm &lt;dbl&gt;, kuolema_lkm &lt;dbl&gt;,</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="do">## #   voimassaolleet_lkm &lt;dbl&gt;, vuodenlopussa_lkm &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## # A tibble: 10 × 14</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">##    aikatyyppi kuukausi_nro vuosikuukausi vuosi kunta_nro kunta_nimi ikaryhma</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;             &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;   </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">##  1 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">##  2 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">##  3 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">##  4 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">##  5 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">##  6 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">##  7 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">##  8 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##  9 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">## 10 Kuukausi              1        202601  2026 245       Kerava     5-9     </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">## # ℹ 7 more variables: sukupuoli &lt;chr&gt;, etuuslaji &lt;chr&gt;, saaja_lkm &lt;dbl&gt;,</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">## #   korvaus_eur &lt;dbl&gt;, kustannus_eur &lt;dbl&gt;, omavastuukerta_lkm &lt;dbl&gt;,</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="do">## #   toimitus_lkm &lt;dbl&gt;</span></span></code></pre></div>
+<p>Also, there is a web application at <a href="https://kelaopendata.vaphana.com/" class="external-link uri">https://kelaopendata.vaphana.com/</a> that can be used to browse this data resource.</p>
 </div>
 <div class="section level2">
 <h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>

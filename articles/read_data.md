@@ -2,7 +2,7 @@
 
 **Installation**
 
-`kelaopendata` can be installed from Github using
+`kelaopendata` can be installed from GitHub using
 
 ``` r
 # Install development version from GitHub
@@ -66,7 +66,7 @@ print(dsets, n = 50)
 
 For this example we choose “Financial aid for students” as our benefit
 of interest. First we download the metadata and print the description
-field
+field.
 
 ``` r
 d_id <- dsets[dsets$name == "opintotuen-saajat-ja-maksetut-tuet", ]$id
@@ -75,9 +75,9 @@ meta$description
 #> [1] "Tämä tietoaineisto liittyy Kelan tilastotietokanta Kelaston dynaamiseen raporttiin Opintotuen saajat ja maksetut tuet.  \n\nAineistossa on tiedot opintotuen saajista, maksetuista tuista ja keskimääräisistä tuista tilastointijakson aikana. Opintotuen saajia ovat henkilöt, joille on maksettu tilastointijakson aikana säännöllinen tai takautuva opintoraha tai asumislisä, tai joilla on voimassa oleva opintolainan valtiontakaus. Maksettuihin tukiin on tilastoitu säännöllisten tai takautuvien maksujen lisäksi myös opintoetuuksien palautukset. Keskimääräiseen opintotukeen (euroa/saaja) on tilastoitu ainoastaan säännöllisesti maksetut tuet ja opintolainan valtiontakauksen euromäärä.\n\nOpintotuen saajat ja maksetut etuudet tilastoidaan kalenterivuosittain, lukuvuosittain ja kuukausittain. Lukuvuosi alkaa elokuun alussa ja päättyy seuraavan vuoden heinäkuun lopussa. Aineistossa on tietoja vuositasolla vuodesta 2005 alkaen, kuukausitasolla vuodesta 2018 alkaen ja lukuvuositasolla 2005/2006 alkaen.\n\nOppilaitosaste määräytyy etuuden maksutapahtumaan liittyvän oppilaitosnumeron perusteella. Oletusarvoisesti opintotuen saaja tilastoituu tilastointijakson viimeisimmän maksutapahtuman mukaiseen oppilaitosasteeseen. Valinnalla \"Astetiedon peruste: Kaikki oppilaitokset\" tuen saaja tilastoituu kaikkiin tilastointijakson maksutapahtumien mukaisiin oppilaitosasteisiin. Yhteissummassa tuen saaja esiintyy kuitenkin vain kerran.\n\nOppilaitosasteeseen \"Ulkomaiset oppilaitokset\" tilastoituvat ne opintotuen saajat, jotka suorittavat tutkintoa ulkomaisessa oppilaitoksessa.\n\nOpintotuen saajan ikä ja asuinkunta tilastoituvat valitun ajanjakson lopun tietojen mukaisesti. Lukuvuoden tiedoissa ikä ja asuinkunta ovat kuitenkin  lukuvuoteen sisältyvän syyslukukauden lopun tieto."
 ```
 
-And then a more technical overview of the content of data set,
-containing names of the csv-files, csv-dialect and values and types of
-each indicator in the data.
+Then a more technical overview of the dataset, containing names of the
+CSV files, CSV dialect, and values and types of each indicator in the
+data.
 
 ``` r
 jsonlite::toJSON(meta$resources, pretty = T)
@@ -233,11 +233,11 @@ meta$resources$schema$fields[[1]] |>
 #> 15 maksettu_laskenta_eur number  default "Keskimääräisen etuuden laskentaan tar…
 ```
 
-### Quering, downloading and plotting the data
+### Querying, downloading and plotting the data
 
-Let’s query data on recipients of Student loan in the city of Turku
-using
-[`kelaopendata::get_data()`](https://ropengov.github.io/kelaopendata/reference/get_data.md)-function
+Let’s get data on recipients of student loans in the city of Turku using
+[`kelaopendata::get_data()`](https://ropengov.github.io/kelaopendata/reference/get_data.md)
+function.
 
 ``` r
 d_opintotuki <- kelaopendata::get_data(
