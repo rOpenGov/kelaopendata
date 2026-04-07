@@ -42,6 +42,7 @@ jsonlite::write_json(x = dlist, path = "./inst/data-parquet/datasets.json", pret
 jsonlite::write_json(x = dlist, path = "./inst/data-parquet/json/datasets.json", pretty = TRUE)
 
 system(paste0("rsync -avz ./inst/data-parquet/ ",Sys.getenv("kelaopendata_server")))
-
+# poistetaan datat tilaa viemästä
+fs::dir_delete("./inst/data-parquet/")
 
 
