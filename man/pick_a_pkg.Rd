@@ -4,7 +4,7 @@
 \alias{pick_a_pkg}
 \title{Get details from a package}
 \usage{
-pick_a_pkg(input_dataset = "8df7939b-6c0e-4587-9aa1-95c076e7b0a3")
+pick_a_pkg(input_dataset = "a11f9ec3-669a-4242-bd30-f133a334901b")
 }
 \arguments{
 \item{input_dataset}{}
