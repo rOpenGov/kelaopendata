@@ -17,6 +17,7 @@ for more comprehensive use cases.
 ## Installation and use
 
 ``` r
+
 # Not yet published in CRAN
 
 # Install development version from GitHub
@@ -26,6 +27,7 @@ remotes::install_github("rOpenGov/kelaopendata")
 ## List available datasets
 
 ``` r
+
 library(kelaopendata)
 dsets <- list_datasets()
 print(dsets, n = 50)
@@ -71,6 +73,7 @@ Print first 10 rows of most recently updated data that is
 Sairaanhoitokorvausten saajat ja maksetut korvaukset
 
 ``` r
+
 kelaopendata::get_data(data_id = dsets[1,]$id, sql = "LIMIT 10")
 ```
 
